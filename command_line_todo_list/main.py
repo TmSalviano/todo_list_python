@@ -1,6 +1,6 @@
 import sqlite3, sys
 
-# primary key / summary (logical key) / body / datetime
+# primary key / summary (logical key) / body
 def exit_func(l):
     if len(sys.argv) <= l:
         print("""
