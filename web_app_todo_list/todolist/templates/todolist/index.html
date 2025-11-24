@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TodoList Index</title>
+    </head>
+    <body>
+        {% if latest5_done %}
+        <ul>
+            {% for todoitem in lastest5_done %}
+                <li><a href="/todolist/{{ todoitem.id }}">{{ todoitem.summary }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p> No done todo items available </p>
+        {% endif %}
+
+        {% if latest5_not_done %}
+        <ul>
+            {% for todoitem in latest5_not_done %}
+                <li><a href="/todolist/{{ todoitem.id }}"> {{ todoitem.summary }} </a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No undone todo items available</p>
+        {% endif %}
+    </body>
+</html>

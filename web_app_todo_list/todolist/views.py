@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.template import loader
+from todolist.models import TodoItem
 
 # Create your views here.
 
@@ -10,15 +12,21 @@ def index(request):
         or delete the todo items and mark them as done which makes them disappear from the list
         when the todoitem is done or undone the pub_date is update to timezone.now().
     """
-    return HttpResponse("Hello, world. This is a todo list")
+    latest5_done = TodoItem.objects.filter(done=True).order_by("-pub_date")[:5]
+    latest5_not_done = TodoItem.objects.filter(done=False).order_by("-pub_date")[:5]
+    context = { "latest5_done" : latest5_done, "latest5_not_done" : latest5_not_done}
+    return render(request, "todolist/index.html", context)
 
 def detail(request, todoitem_id):
     """
         Displays summary, todo_text and pub_date and also allows you to mark the todo item
         as done.
     """
-    response = f"You are looking at details of {todoitem_id}"
-    return HttpResponse(response)
+    try:
+        todoitem = TodoItem.objects.get(pk=todoitem_id)
+    except TodoItem.DoesNotExist:
+        raise Http404("Todo Item does not exist")
+    return render(request, "todolist/detail.html", { "todoitem" : todoitem})
     
 #This is a list with all of the todo items with a search bar at the top that matches
 def all_items(request):
