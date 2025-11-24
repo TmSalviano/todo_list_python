@@ -18,7 +18,7 @@ def detail(request, todoitem_id):
         as done.
     """
     response = f"You are looking at details of {todoitem_id}"
-    HttpResponse(response)
+    return HttpResponse(response)
     
 #This is a list with all of the todo items with a search bar at the top that matches
 def all_items(request):
@@ -27,19 +27,21 @@ def all_items(request):
         looking for matches with summary, todo_text, done and pub_dates. You can create or delete
         the todo items
     """
-    HttpResponse("This is a list of all todo items with a search bar at the top")
+    return HttpResponse("This is a list of all todo items with a search bar at the top")
     
 def create(request):
     """
         This is the create view for todo items. It has a place to summarize, descrice the item and
         define the date and time of the item. 
     """
+    return HttpResponse("Here I create todo items")
 
 def delete(request, todoitem_id):
     """
         This is the delete view for the todo items. It shows a delete message containing the summary
         of the item
     """
+    return HttpResponse("Here I delete todo items")
     
 #No need for a update view. Creating new correct todo items and deleting the previous bad ones is 
 #simple enough
