@@ -1,5 +1,5 @@
 """
-URL configuration for mysite project.
+URL configuration for TodoListSite project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -16,13 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.conf import settings
-from debug_toolbar.toolbar import debug_toolbar_urls
-
-if not settings.TESTING:
-    from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
-    path('polls/', include('polls.urls')),
+    path("todolist/", include("todolist.urls")),
     path('admin/', admin.site.urls),
-] + debug_toolbar_urls()
+]
